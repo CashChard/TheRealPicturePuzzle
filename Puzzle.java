@@ -30,6 +30,7 @@ public class Puzzle extends SimplePicture{
       			pic[row][col] = new Pixel(pict,col,row);
 	}
 	
+	//Ignore this
 	public void mirrorHorizontalBotToTop() {
 		Pixel[][] pixels = this.getPixels2D();
 		Pixel topPixel = null;
