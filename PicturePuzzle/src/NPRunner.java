@@ -7,9 +7,15 @@ import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 public class NPRunner {
 
 	public static void main(String[] args) {
+		create();
 		intro();
 	}
 	public static void intro() {//introduces user to game and explains rules
@@ -35,7 +41,9 @@ public class NPRunner {
 	private static void create() {//JFrame created
 		JFrame f = new JFrame("Number Puzzle");
 		JPanel p = new NPPanel();
-		f.setSize(2000, 1600);
+		JPanel b = new ImagePanel();
+		f.setSize(1920, 1029);
+		f.setResizable(false);
 		f.setContentPane(p);
 		p.setBackground(Color.ORANGE);
 		f.setVisible(true);
@@ -82,4 +90,23 @@ class NPPanel extends JPanel {//Panel class
 		g.setFont(new Font("", Font.PLAIN, 25));
 		g.drawString("", 720, 100);
 	}
+}
+
+ class ImagePanel extends JPanel{
+
+    private BufferedImage image;
+
+    public ImagePanel() {
+       try {                
+          image = ImageIO.read(new File("background.jpeg"));
+       } catch (IOException ex) {
+            // handle exception...
+       }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters            
+    }
 }
