@@ -58,6 +58,7 @@ public class Puzzle extends SimplePicture{
 	}
 }
 
+/*********************************************************************************************************************************/
 public class NPRunner {
 
 	public static void main(String[] args) {
