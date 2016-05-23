@@ -59,10 +59,20 @@ public class Puzzle extends SimplePicture{
 }
 
 /*********************************************************************************************************************************/
+/*Richard Oldroyd
+ * 5/16/16
+ * Number Puzzle runner
+ */
+import java.util.*;
+import java.awt.*;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 public class NPRunner {
 
 	public static void main(String[] args) {
-		create();
+		create();//
 		intro();
 	}
 	public static void intro() {//introduces user to game and explains rules
@@ -88,11 +98,11 @@ public class NPRunner {
 	private static void create() {//JFrame created
 		JFrame f = new JFrame("Number Puzzle");
 		JPanel p = new NPPanel();
-		JPanel b = new ImagePanel();
-		f.setSize(1920, 1029);
-		f.setResizable(false);
+		f.setSize(990, 1029);
+		f.setResizable(false);//CHANGE TO false WHEN FINISHED
 		f.setContentPane(p);
-		p.setBackground(Color.ORANGE);
+		Color SOFTBLUE = new Color(0,191,255);
+		p.setBackground(SOFTBLUE);
 		f.setVisible(true);
 		//call Puzzle class here
 
@@ -128,32 +138,59 @@ public class NPRunner {
 
 class NPPanel extends JPanel {//Panel class
 
+	//public static final int X = 0;
+	//public static final int Y = 0;
 	public NPPanel() {}
 	// creates panel
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.setFont(new Font("Arial", Font.PLAIN, 80));
-		g.drawString("Number Puzzle", 700, 70);
-		g.setFont(new Font("", Font.PLAIN, 25));
+		int x = 145;
+		int y = 1000;
+		Color DARKBLUE = new Color(100,149,237);
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, x, y);
+		g.fillRect(830, 0, x, y);
+		sierp.main(null, g);
+		
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Arial", Font.PLAIN, 100));
+		g.drawString("Number Puzzle", 145, 80);
+		g.setFont(new Font("", Font.BOLD, 25));
 		g.drawString("", 720, 100);
+		
 	}
+	
 }
+ class sierp {
+	
+	public static final int X = 145;
+	public static final int Y = 1000;
 
- class ImagePanel extends JPanel{
-
-    private BufferedImage image;
-
-    public ImagePanel() {
-       try {                
-          image = ImageIO.read(new File("background.jpeg"));
-       } catch (IOException ex) {
-            // handle exception...
-       }
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters            
-    }
+	public static void main(String[] args, Graphics g) {
+		g.fillRect(X/3,Y/3,X/3,Y/3);
+		Squares(g,X,Y,0,0);
+	}
+	public static void Squares(Graphics g, int x, int y, int factorX, int factorY) {
+		Random rand= new Random();
+		int RandX= rand.nextInt(256);
+		int RandY= rand.nextInt(256);
+		int RandZ= rand.nextInt(256);
+		
+		Color random = new Color(RandX, RandY, RandZ);
+		g.setColor(random);
+		g.fillRect((x/3)+factorX,(y/3)+factorY,x/3,y/3);
+	
+		if(x>0 && y>0) {
+			Squares(g,x/3,y/3,factorX,factorY);
+			Squares(g,x/3,y/3,factorX + x/3,factorY);
+			Squares(g,x/3,y/3,factorX + x/3*2,factorY);
+			Squares(g,x/3,y/3,factorX+x/3*2,factorY);
+			Squares(g,x/3,y/3,factorX,factorY+y/3);//4
+			Squares(g,x/3,y/3,factorX,factorY+y/3*2);//5
+			Squares(g,x/3,y/3,factorX+x/3,factorY+y/3*2);//6
+			Squares(g,x/3,y/3,factorX+x/3*2,factorY+y/3);//7
+			Squares(g,x/3,y/3,factorX+x/3*2,factorY+y/3*2);//8/*/
+		
+	}
+	}
 }
