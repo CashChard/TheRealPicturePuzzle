@@ -161,16 +161,17 @@ class NPPanel extends JPanel {//Panel class
 	}
 	
 }
- class sierp {
+class sierp {
 	
 	public static final int X = 145;
 	public static final int Y = 1000;
 
 	public static void main(String[] args, Graphics g) {
 		g.fillRect(X/3,Y/3,X/3,Y/3);
-		Squares(g,X,Y,0,0);
+		squares(g,X,Y,0,0);
+		squares(g,X,Y,830,0);
 	}
-	public static void Squares(Graphics g, int x, int y, int factorX, int factorY) {
+	public static void squares(Graphics g, int x, int y, int factorX, int factorY) {
 		Random rand= new Random();
 		int RandX= rand.nextInt(256);
 		int RandY= rand.nextInt(256);
@@ -181,16 +182,15 @@ class NPPanel extends JPanel {//Panel class
 		g.fillRect((x/3)+factorX,(y/3)+factorY,x/3,y/3);
 	
 		if(x>0 && y>0) {
-			Squares(g,x/3,y/3,factorX,factorY);
-			Squares(g,x/3,y/3,factorX + x/3,factorY);
-			Squares(g,x/3,y/3,factorX + x/3*2,factorY);
-			Squares(g,x/3,y/3,factorX+x/3*2,factorY);
-			Squares(g,x/3,y/3,factorX,factorY+y/3);//4
-			Squares(g,x/3,y/3,factorX,factorY+y/3*2);//5
-			Squares(g,x/3,y/3,factorX+x/3,factorY+y/3*2);//6
-			Squares(g,x/3,y/3,factorX+x/3*2,factorY+y/3);//7
-			Squares(g,x/3,y/3,factorX+x/3*2,factorY+y/3*2);//8/*/
-		
-	}
+			squares(g,x/3,y/3,factorX,factorY);
+			squares(g,x/3,y/3,factorX + x/3,factorY);
+			squares(g,x/3,y/3,factorX + x/3*2,factorY);
+			squares(g,x/3,y/3,factorX+x/3*2,factorY);
+			squares(g,x/3,y/3,factorX,factorY+y/3);
+			squares(g,x/3,y/3,factorX,factorY+y/3*2);
+			squares(g,x/3,y/3,factorX+x/3,factorY+y/3*2);
+			squares(g,x/3,y/3,factorX+x/3*2,factorY+y/3);
+			squares(g,x/3,y/3,factorX+x/3*2,factorY+y/3*2);
+		}
 	}
 }
