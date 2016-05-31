@@ -98,7 +98,7 @@ public class NPRunner {
 	private static void create() {//JFrame created
 		JFrame f = new JFrame("Number Puzzle");
 		JPanel p = new NPPanel();
-		f.setSize(990, 1029);
+		f.setSize(1100, 1029);
 		f.setResizable(false);//CHANGE TO false WHEN FINISHED
 		f.setContentPane(p);
 		Color SOFTBLUE = new Color(0,191,255);
@@ -119,19 +119,21 @@ public class NPRunner {
 		}
 	}
 
-	public static void end(int moves, Scanner console) {
+	public static void end(int moves, Scanner console, JFrame f) {
 		System.out.println("==============================================\n"
 				+ "CONGRATULATIONS, YOU WIN!"
 				+ "\nTotal moves: " + moves
 				+ "\nWould you like to play again?(Y or N)");
-			checkEnd(console);
+			checkEnd(console, f);
 	}
-	public static void checkEnd(Scanner console) {//for after game is finished
+	public static void checkEnd(Scanner console, JFrame f) {//for after game is finished
 		String again = console.next();
 		if(again.startsWith("Y") || again.startsWith("y")) {
 			getD(console);
 		}
-		
+		else {
+			f.dispose();
+		}
 	}
 	
 }
@@ -144,32 +146,31 @@ class NPPanel extends JPanel {//Panel class
 	// creates panel
 	public void paint(Graphics g) {
 		super.paint(g);
-		int x = 145;
+		int x = 205;
 		int y = 1000;
-		Color DARKBLUE = new Color(100,149,237);
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, x, y);
-		g.fillRect(830, 0, x, y);
+		g.fillRect(890, 0, x, y);
 		sierp.main(null, g);
 		
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Arial", Font.PLAIN, 100));
-		g.drawString("Number Puzzle", 145, 80);
+		g.drawString("Number Puzzle", 205, 80);
 		g.setFont(new Font("", Font.BOLD, 25));
 		g.drawString("", 720, 100);
 		
 	}
 	
 }
-class sierp {
+ class sierp {
 	
-	public static final int X = 145;
+	public static final int X = 205;
 	public static final int Y = 1000;
 
 	public static void main(String[] args, Graphics g) {
 		g.fillRect(X/3,Y/3,X/3,Y/3);
 		squares(g,X,Y,0,0);
-		squares(g,X,Y,830,0);
+		squares(g,X,Y,890,0);
 	}
 	public static void squares(Graphics g, int x, int y, int factorX, int factorY) {
 		Random rand= new Random();
