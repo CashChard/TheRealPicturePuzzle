@@ -29,8 +29,12 @@ public class Puzzle implements java.awt.event.ActionListener{
 	private static double moves=0;
 
 	public Puzzle(){
-		arr = new int[size][size];
 		intro();
+		Scanner console = new Scanner(System.in);
+		getD(console);
+		arr=new int [size][size];
+		makeNumbers();
+		create();
 	}
 
 	public void intro() {//introduces user to game and explains rules
@@ -49,9 +53,6 @@ public class Puzzle implements java.awt.event.ActionListener{
 		else
 			System.out.println("Are you ready yet?");
 		}
-		Scanner console = new Scanner(System.in);
-		getD(console);
-		create();
 	}
 
 	
@@ -70,11 +71,10 @@ public class Puzzle implements java.awt.event.ActionListener{
 	  		int s = 660/size - size*10;
 	  		int start = 205 + (660-s*size)/2;
 		    JButton[][] gameButtons= new JButton[size][size];
-			for (int i = 0; i < size; i++) 
-			{
-			  for (int j = 0; j < size; j++) 
-			  {
-			    gameButtons[i][j] = new JButton("Puzzle Game");
+			for (int i = 0; i < size; i++){
+			  for (int j = 0; j < size; j++){
+				String name = arr[i][j] + "";
+			    gameButtons[i][j] = new JButton(name);
 			    gameButtons[i][j].setBounds(start+s*i,start+s*j,s,s);
 			    p.add(gameButtons[i][j]);
 			  }
@@ -100,6 +100,27 @@ public class Puzzle implements java.awt.event.ActionListener{
 				}
 			}
 		}
+		boolean again = check();
+		if(!again)
+			makeNumbers();
+	}
+	
+	public boolean check(){
+		int inversions=0;
+		for(int i=0; i<arr.length-1; i++){
+			for(int j=0; j<arr[0].length-1; j++){
+				for(int k=0; k<arr.length-1; k++){
+					for(int m=0; m<arr[0].length-1; m++){
+						if(arr[i][j]>arr[k][m])
+							inversions++;
+					}
+				}
+			}
+		}
+		if(inversions%2==0)
+			return true;
+		else
+			return false;
 	}
 	
 	public static void getD(Scanner console) {//asks difficulty and makes sure user answer is valid
@@ -159,7 +180,7 @@ class NPPanel extends JPanel {//Panel class
 		super.paint(g);
 		int x = 205;
 		int y = 1000;
-		Color DARKBLUE = new Color(100,149,237);
+		//Color DARKBLUE = new Color(100,149,237);
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, x, y);
 		g.fillRect(890, 0, x, y);
