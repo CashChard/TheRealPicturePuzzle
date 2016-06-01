@@ -184,6 +184,9 @@ public class Puzzle implements java.awt.event.ActionListener{
 	       }
 	     }
 	  }
+	  Scanner console = new Scanner(System.in);
+	  end(console);
+
 	}
 }
 
