@@ -107,9 +107,15 @@ public class Puzzle implements java.awt.event.ActionListener{
 		System.out.println("		1. Easy(3x3 Grid/1-8)		2. Medium(4x4 Grid/1-15)		3. Hard(5x5 Grid)/1-24");
 		System.out.print("User choice: ");
 		int d = console.nextInt();
+		boolean check=true;
+		while(check){
 		if(d>3 || d<1) {
 			System.out.println("Try Again\n");
-			getD(console);
+			System.out.print("User choice: ");
+			d = console.nextInt();
+		}
+		else
+			check=false;
 		}
 		size=d+2;
 	}
