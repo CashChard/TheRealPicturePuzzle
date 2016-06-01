@@ -167,7 +167,7 @@ public class Puzzle implements java.awt.event.ActionListener{
 	    for (int j = 0; j < size; j++){
 	       if(ae.getSource()==gameButtons[i][j]) //gameButtons[i][j] was clicked
 	       {
-	            System.out.println("Button " + i + j + " is pressed");
+	            System.out.println("Button is pressed");
 	            moves+=0.5;
 	            s++;
 	            
