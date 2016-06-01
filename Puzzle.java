@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 /************
- * Richard Oldroyd & Siobahn
+ * Siobhan Gannon
  * Period C
  * May 9, 2016
  * This is a sliding puzzle game and final project.
@@ -27,12 +27,17 @@ public class Puzzle implements java.awt.event.ActionListener{
 	private JFrame f = new JFrame("Number Puzzle");
 	private JPanel p = new NPPanel();
 	private static double moves=0;
+	private int s=0;
+	private String s1="";
+	private String s2="";
+	private int p1=0;
+	private int p2=0;
 
 	public Puzzle(){
 		intro();
 		Scanner console = new Scanner(System.in);
 		getD(console);
-		arr = new int[size][size];
+		arr=new int [size][size];
 		makeNumbers();
 		create();
 	}
@@ -51,9 +56,8 @@ public class Puzzle implements java.awt.event.ActionListener{
 			go=false;
 		}
 		else
-			System.out.println("Type \"Ready\" to start the game!");
+			System.out.println("Are you ready yet?");
 		}
-		
 	}
 
 	
@@ -72,11 +76,9 @@ public class Puzzle implements java.awt.event.ActionListener{
 	  		int s = 660/size - size*10;
 	  		int start = 205 + (660-s*size)/2;
 		    JButton[][] gameButtons= new JButton[size][size];
-			for (int i = 0; i < size; i++) 
-			{
-			  for (int j = 0; j < size; j++) 
-			  {
-				  String name = arr[i][j] + "";
+			for (int i = 0; i < size; i++){
+			  for (int j = 0; j < size; j++){
+				String name = arr[i][j] + "";
 			    gameButtons[i][j] = new JButton(name);
 			    gameButtons[i][j].setBounds(start+s*i,start+s*j,s,s);
 			    p.add(gameButtons[i][j]);
@@ -107,6 +109,7 @@ public class Puzzle implements java.awt.event.ActionListener{
 		if(!again)
 			makeNumbers();
 	}
+	
 	public boolean check(){
 		int inversions=0;
 		for(int i=0; i<arr.length-1; i++){
@@ -124,6 +127,7 @@ public class Puzzle implements java.awt.event.ActionListener{
 		else
 			return false;
 	}
+	
 	public static void getD(Scanner console) {//asks difficulty and makes sure user answer is valid
 		System.out.println("What is the difficulty you want?(Type the #):");
 		System.out.println("		1. Easy(3x3 Grid/1-8)		2. Medium(4x4 Grid/1-15)		3. Hard(5x5 Grid)/1-24");
@@ -133,16 +137,15 @@ public class Puzzle implements java.awt.event.ActionListener{
 		while(check){
 		if(d>3 || d<1) {
 			System.out.println("Try Again\n");
-			System.out.println("		1. Easy(3x3 Grid/1-8)		2. Medium(4x4 Grid/1-15)		3. Hard(5x5 Grid)/1-24");
 			System.out.print("User choice: ");
 			d = console.nextInt();
 		}
 		else
 			check=false;
 		}
-		System.out.println("Creating board...");
 		size=d+2;
 	}
+
 	public static void end(Scanner console) {
 		System.out.println("==============================================\n"
 				+ "CONGRATULATIONS, YOU WIN!"
@@ -166,6 +169,18 @@ public class Puzzle implements java.awt.event.ActionListener{
 	       {
 	            System.out.println("Button " + i + j + " is pressed");
 	            moves+=0.5;
+	            s++;
+	            
+	            if(s%2==1){
+	       		 	s1="" + arr[i][j];
+	            	p1=i;
+	            	p2=j;
+	            }
+	       	  	else{
+	       	  		s2="" + arr[i][j];
+	       	  		gameButtons[i][j].setText(s1);
+	       	  		gameButtons[p1][p2].setText(s2);
+	       	  	}
 	       }
 	     }
 	  }
@@ -182,6 +197,7 @@ class NPPanel extends JPanel {//Panel class
 		super.paint(g);
 		int x = 205;
 		int y = 1000;
+		//Color DARKBLUE = new Color(100,149,237);
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, x, y);
 		g.fillRect(890, 0, x, y);
