@@ -33,6 +33,7 @@ public class Puzzle implements java.awt.event.ActionListener{
 	private int p1=0;
 	private int p2=0;
 
+	//Constructor will begin the game
 	public Puzzle(){
 		intro();
 		Scanner console = new Scanner(System.in);
@@ -110,6 +111,7 @@ public class Puzzle implements java.awt.event.ActionListener{
 			makeNumbers();
 	}
 	
+	//This will check if the number arrangement is possible
 	public boolean check(){
 		int inversions=0;
 		for(int i=0; i<arr.length-1; i++){
@@ -146,6 +148,7 @@ public class Puzzle implements java.awt.event.ActionListener{
 		size=d+2;
 	}
 
+	//This will run when the user has won the game
 	public static void end(Scanner console) {
 		System.out.println("==============================================\n"
 				+ "CONGRATULATIONS, YOU WIN!"
@@ -153,6 +156,8 @@ public class Puzzle implements java.awt.event.ActionListener{
 				+ "\nWould you like to play again?(Y or N)");
 			checkEnd(console);
 	}
+	
+	//This will check if the user wants to play agian
 	public static void checkEnd(Scanner console) {//for after game is finished
 		String again = console.next();
 		if(again.startsWith("Y") || again.startsWith("y")) {
@@ -215,6 +220,8 @@ class NPPanel extends JPanel {//Panel class
 	}
 	
 }
+
+//This will create a sierpinski's carpet design in the JPanel
 class sierp {
 	
 	public static final int X = 205;
